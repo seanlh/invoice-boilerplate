@@ -1,7 +1,7 @@
 %!TEX TS-program = xelatex
 %!TEX encoding = UTF-8 Unicode
 
-\documentclass[$fontsize$, a4paper]{article}
+\documentclass[$fontsize$, letterpaper]{article}
 
 % LAYOUT
 %--------------------------------
@@ -51,6 +51,8 @@ $endif$
 % TABLE CUSTOMIZATION
 %--------------------------------
 \usepackage{spreadtab}
+\usepackage{siunitx}
+\sisetup{round-mode=places,round-precision=2,output-decimal-marker={.},mode=text,detect-family=false}
 \usepackage[compact]{titlesec} % For customizing title sections
 \titlespacing*{\section}{0pt}{3pt}{-7pt} % Remove margin bottom from the title
 \usepackage{arydshln} % For the dotted line on the table
@@ -74,8 +76,8 @@ $endif$
 \hypersetup
 {
   pdfauthor={$author$},
-  pdfsubject=Invoice Nr. $invoice-nr$,
-  pdftitle=Invoice Nr. $invoice-nr$,
+  pdfsubject=Invoice Nr. $invoice-number$,
+  pdftitle=Invoice Nr. $invoice-number$,
   linkcolor=blue,
   citecolor=blue,
   filecolor=black,
@@ -99,6 +101,8 @@ $endfor$
 
 \vspace{1em}
 
+\section*{\textsc{Bill To}}
+
 \normalsize \sffamily
 $for(to)$
 $to$\\
@@ -108,20 +112,25 @@ $endfor$
 
 \begin{flushright}
   \small
-  $city$, \today
+  \today
 \end{flushright}
 
 \vspace{1em}
 
 
-\section*{\textsc{Invoice} \textsc{\#$invoice-nr$}}
+\section*{\textsc{Invoice} \textsc{\#$invoice-number$}}
+\sffamily
 \footnotesize
 \newcounter{pos}
 \setcounter{pos}{0}
-\STautoround*{2} % Get spreadtab to always display the decimal part
-$if(commasep)$\STsetdecimalsep{,}$endif$ % Use comma as decimal separator
+$if(commasep)$
+  \STsetdecimalsep{,}
+  \sisetup{output-decimal-marker={,}}
+$endif$
+% Format numbers to always show 2 decimal places in sans-serif
+\renewcommand{\STprintnum}[1]{\num{#1}}
 
-\begin{spreadtab}{{tabular}[t t t]{lp{8.2cm}r}}
+\begin{spreadtab}{{tabular}[t t t]{lp{\dimexpr\textwidth-4.33cm\relax}r}}
   \hdashline[1pt/1pt]
   @ \noalign{\vskip 2mm} \textbf{Pos.} & @ \textbf{Description} & @ \textbf{Prices in $currency$} \\ \hline
       $for(service)$ @ \noalign{\vskip 2mm} \refstepcounter{pos} \thepos 
@@ -130,11 +139,11 @@ $if(commasep)$\STsetdecimalsep{,}$endif$ % Use comma as decimal separator
           $for(service.details)$\scriptsize \item $service.details$ 
           $endfor$ \end{itemize}
           $endif$ & $service.price$\\$endfor$ \noalign{\vskip 2mm} \hline
-  $if(VAT)$
+  $if(sales-tax)$
     @ & @ \multicolumn{1}{r}{Subtotal:}                & :={sum(c1:[0,-1])} \\ \hhline{~~-}
-    @ & @ \multicolumn{1}{r}{VAT $VAT$\%:}               & $VAT$/100*[0,-1] \\ \hhline{~~-}
+    @ & @ \multicolumn{1}{r}{Sales Tax $sales-tax$\%:}               & $sales-tax$/100*[0,-1] \\ \hhline{~~-}
   $endif$
-  @ & @ \multicolumn{1}{r}{\textbf{Total:}}   & \textbf{:={$if(VAT)$[0,-1]+[0,-2]$else$sum(c1:[0,-1])$endif$}} \\ \hhline{~~-}
+  @ & @ \multicolumn{1}{r}{\textbf{Total:}}   & \textbf{:={$if(sales-tax)$[0,-1]+[0,-2]$else$sum(c1:[0,-1])$endif$}} \\ \hhline{~~-}
 \end{spreadtab}
 
 

@@ -1,16 +1,13 @@
 ---
-invoice-nr: 2015-11-04
-author: Max Mustermann
-city: Musterstadt
+invoice-number: 2025-11-24
+author: Sean Hernandez
 from:
-- Musterstraße 37
-- 12345 Musterstadt
+- 13051 SW 17th Ct
+- Miramar, FL 33027
 to:
-- Erika Mustermann
-- Musterallee 1
-- 12345 Musterstadt
-- Germany
-VAT: 20
+- 13051 SW 17th Ct
+- Miramar, FL 33027
+sales-tax: 6
 service:
 - description: The first service provided
   price: 320.00
@@ -25,26 +22,21 @@ service:
   price: 65.00
 
 closingnote: |
-  Please transfer the due amount to the following bank account within the next 14 days:
-   
-    Mustermann GmbH  
-    Kreditinstitut: Deutsche Postbank AG  
-    IBAN: DE18 3601 0043 9999 9999 99  
-    BIC: PBNKDEFF  
-
-    We really appreciate your business and look forward to future projects together.
+  Payment is due within 30 days (Net 30) of the invoice date. Please remit payment by check, ACH transfer, or wire transfer.
+    
+    We appreciate your business and look forward to working with you again.
 
     Best regards,
 
 # Invoice settings
-currency: EUR
+currency: USD
 # commasep: true
-lang: english
+lang: american
 
 # Typography and layout
 seriffont: Hoefler Text
 sansfont: Helvetica Neue
 fontsize: 10pt
-geometry: a4paper, left=43mm, right=43mm, top=51mm, bottom=17mm
+geometry: letterpaper, left=1in, right=1in, top=1in, bottom=1in
 # letterhead: true # To include personalized letterheads
 ---

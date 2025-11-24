@@ -44,7 +44,7 @@ Unless you plan to edit the template, no particular LaTeX knowledge is required 
 
 ## Dependencies
 
-1. LaTeX with the following extra packages: `fontspec` `geometry` `ragged2e` `spreadtab` `fp` `xstring` `arydshln` `hhline` `titlesec` `enumitem` `xunicode` `xltxtra` `hyperref` `polyglossia` `wallpaper` `footmisc`
+1. LaTeX with the following extra packages: `fontspec` `geometry` `ragged2e` `spreadtab` `fp` `xstring` `arydshln` `hhline` `titlesec` `enumitem` `xunicode` `xltxtra` `hyperref` `polyglossia` `wallpaper` `footmisc` `greek-fontenc` `babel-english` `simplekv` `realscripts` `siunitx`
 2. [Pandoc](http://pandoc.org/), the universal document converter.
 
 I highly recommend [TinyTeX](https://yihui.org/tinytex/) as LaTeX distribution. All additional packages can be installed with `tlmgr` as needed.
